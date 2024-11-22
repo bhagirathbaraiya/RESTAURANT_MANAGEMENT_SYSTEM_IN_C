@@ -1,0 +1,58 @@
+title Hotel Management System Flowchart
+
+// Authentication Process
+Start Authentication [shape: oval, icon: lock] > Verify Credentials [shape: diamond, icon: key]
+Verify Credentials > Admin Access [shape: rectangle, icon: user-check]: Admin
+Verify Credentials > Receptionist Access [shape: rectangle, icon: user]: Receptionist
+Verify Credentials > Access Denied [shape: oval, icon: x-square]: Invalid
+
+// Admin Panel
+Admin Access > View Table Status [shape: rectangle, icon: table]
+Admin Access > View Customer Details [shape: rectangle, icon: users]
+View Table Status > Tables.csv [shape: rectangle, icon: file-text]
+View Customer Details > Customers.csv [shape: rectangle, icon: file-text]
+View Customer Details > Waiting.csv [shape: rectangle, icon: file-text]
+
+// Receptionist Customer Management
+Receptionist Access > Add Customer [shape: rectangle, icon: user-plus]
+Receptionist Access > Edit Customer [shape: rectangle, icon: edit]
+Receptionist Access > Search Customer [shape: rectangle, icon: search]
+Receptionist Access > Delete Customer [shape: rectangle, icon: user-minus]
+
+Add Customer > Collect Customer Info [shape: rectangle, icon: clipboard]
+Collect Customer Info > Generate Customer ID [shape: rectangle, icon: hash]
+Generate Customer ID > Check Table Availability [shape: diamond, icon: check-square]
+Check Table Availability > Assign Table [shape: rectangle, icon: table]: Available
+Check Table Availability > Add to Waiting Queue [shape: rectangle, icon: clock]: Full
+Assign Table > Update Tables.csv [shape: rectangle, icon: file-text]
+
+Edit Customer > Update Customer Info [shape: rectangle, icon: edit-2]
+
+Search Customer > Locate Customer by ID [shape: rectangle, icon: search]
+
+Delete Customer > Remove Customer Data [shape: rectangle, icon: trash]
+Remove Customer Data > Update Tables.csv
+
+// Table Management
+Assign Table > Update Dining Status [shape: rectangle, icon: table]
+
+// Queue Management
+Waiting.csv > Assign Waiting Customer [shape: rectangle, icon: user-check]
+Assign Waiting Customer > Update Tables.csv
+
+// Data Stores
+Customers.csv > Display for Admin [shape: rectangle, icon: eye]
+Customers.csv > Display for Receptionist [shape: rectangle, icon: eye]
+Tables.csv > Display for Admin
+Tables.csv > Display for Receptionist
+Waiting.csv > Display for Admin
+Waiting.csv > Display for Receptionist
+
+// Security.c
+Waiting.csv < Add to Waiting Queue
+Customers.csv < Update Customer Info
+Customers.csv < Locate Customer by ID
+Customers.csv < Remove Customer Data
+Tables.csv < Update Dining Status
+Verify Credentials < Security.c
+
